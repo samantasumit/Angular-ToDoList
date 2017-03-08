@@ -1,0 +1,70 @@
+<!-- 
+    To Do List Page
+    created by Sumit Samanta
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+
+        <title>To Do List</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">            
+        <link rel="stylesheet" href="css/bootstrap.min.css"> 
+        <link rel="stylesheet" href="css/todo.css">
+        <link rel="icon" type="image/ico" href="images/todo.png">
+        <script src="js/angular.min.js"></script>
+        <script src="js/script.js"></script>
+
+    </head>
+
+    <body ng-app="listApp">
+        <div class="container">
+            <div class="jumbotron">
+                <h2>To Do List</h2>
+            </div>
+            <div ng-controller="listController" class="col-xs-offset-1 col-sm-offset-4 col-md-offset-4 col-lg-offset-4 col-xs-10 col-sm-4 col-md-4 col-lg-4">
+
+                <table class="todolist table">
+                    <thead>
+                        <tr>
+                            <form ng-submit="add()">
+                                <th colspan="3">
+                                    <input class="form-control no-border-radius" type="text" placeholder="New Item..." maxlength="24" ng-model="newitem" ng-required="true">
+                                </th>
+                                <th class="right-align">
+                                    <input type="submit" class="btn btn-primary" value="Add">
+                                </th>
+                            </form>
+                        </tr>
+                    </thead>
+
+                    <tbody>
+                        <tr class="items" ng-repeat="item in list">
+                            <td ng-click="done($index)">
+                                <span>
+                                    <i ng-class="{'glyphicon glyphicon-ok' : item.status}"></i>
+                                    <i ng-class="{'glyphicon glyphicon-edit' : !item.status}"></i>
+                                </span>
+                            </td>
+                            <th ng-click="done($index)">
+                                {{item.name}}
+                            </th> 
+                            
+                            <td ng-click="done($index)">
+                                {{item.time | date : 'dd/MM/yy HH:mm:ss'}}
+                            </td>
+                            <td class="right-align">
+                                <input type="button" class="btn btn-danger btn-xs" ng-click="remove($index)" value="&times">
+                            </td> 
+                    </tbody>
+                </table>
+
+                <span class="alert alert-danger center-align" ng-show="errorMessage">The item already exists in the list!</span>
+                
+            </div>
+        </div>
+
+    </body>
+
+</html>
